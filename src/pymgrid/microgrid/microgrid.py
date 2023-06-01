@@ -973,7 +973,7 @@ class Microgrid(yaml.YAMLObject):
         from pymgrid import PROJECT_PATH
         n = microgrid_number
 
-        if n not in np.arange(27):
+        if n not in np.arange(28):
             raise TypeError(f'Invalid microgrid_number {n}, must be an integer in the range [0, 25).')
 
         with open(PROJECT_PATH / f"data/scenario/pymgrid25/microgrid_{n}/microgrid_{n}.yaml", "r") as f:
