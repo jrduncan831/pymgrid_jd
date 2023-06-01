@@ -242,10 +242,15 @@ class GaussianNoiseForecaster(Forecaster):
             scalar_val *= np.abs(time_series.mean())
 
         if self.increase_uncertainty:
-            return scalar_val * np.outer(
-                1 + np.log(1 + np.arange(self._noise_size[0])),
-                np.ones(self._noise_size[-1])
-            )
+             def sigmoid(z):
+                return 1+(1/(1 + np.exp(-.4*(z-12))))
+             return scalar_val* np.outer(
+                    sigmoid(np.arange(self._noise_size[0])),
+                            np.ones(self._noise_size[-1]))
+        #    return scalar_val * np.outer(
+        #        1 + np.log(1 + np.arange(self._noise_size[0])),
+        #        np.ones(self._noise_size[-1])
+        #    )
         else:
             return scalar_val
 
